@@ -245,11 +245,15 @@ def main():
                     st.write("Enter a natural language query to analyze the redacted data using GPT-4 function calling.")
 
                     # OpenAI Configuration
-                    try:
-                        client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-                    except Exception as e:
-                        st.error("OpenAI API key not found in Streamlit secrets. Please add OPENAI_API_KEY.")
+                    if "OPENAI_API_KEY" not in st.secrets:
+                        st.error("OpenAI API key not found in Streamlit secrets. Please add OPENAI_API_KEY to .streamlit/secrets.toml (do not commit this file to GitHub). AI analytics are disabled until this is set.")
                         client = None
+                    else:
+                        try:
+                            client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+                        except Exception as e:
+                            st.error("Could not initialize OpenAI client. Check your API key and internet connection.")
+                            client = None
 
                     healthcare_functions = [
                         {

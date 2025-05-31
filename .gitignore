@@ -1,0 +1,15 @@
+# OS37-demo Python/Streamlit ignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+venv/
+build/
+dist/
+.eggs/
+*.egg-info/
+.DS_Store
+# Streamlit secrets (never commit!)
+.streamlit/secrets.toml
