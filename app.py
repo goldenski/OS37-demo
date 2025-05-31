@@ -4,6 +4,15 @@ import numpy as np
 import plotly.express as px
 from PIL import Image
 import os
+import glob
+import base64
+import hashlib
+import datetime
+import openai
+import json
+import time
+from io import StringIO
+from typing import List, Dict, Any
 
 # --- Custom CSS for dark blue gradient header and sidebar collapse ---
 CUSTOM_CSS = """
@@ -121,9 +130,6 @@ def main():
         with tabs[0]:
             st.subheader(":mag: Query & Analysis")
             st.info("Query and analyze medical datasets with privacy protection.")
-            import glob, base64, hashlib, datetime, openai, json, time
-            from io import StringIO
-            from typing import List, Dict, Any
             # List available datasets
             data_dir = os.path.join("data")
             parquet_files = sorted(glob.glob(os.path.join(data_dir, "*.parquet")))
@@ -193,7 +199,6 @@ def main():
                     st.components.v1.html(component_html, height=0)
                     # Listen for result (pseudo, actual Streamlit component would use on_event)
                     # For demo, fallback after 5s
-                    import time
                     time.sleep(5)
                     try:
                         # Try to load the redacted file (simulate)
@@ -696,6 +701,7 @@ def main():
 
         # --- Stateless Verification Tab ---
         with tabs[3]:
+            st.write("")
 
         # --- Documentation Tab ---
         with tabs[4]:
