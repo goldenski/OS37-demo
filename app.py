@@ -76,10 +76,14 @@ def render_header():
     with st.container():
         st.markdown('<div class="os37-header">', unsafe_allow_html=True)
         with col1:
-            if os.path.exists(logo_path):
+            try:
                 st.image(logo_path, width=60)
-            else:
+            except Exception as e:
                 st.write(":hospital:")
+                if not os.path.exists(logo_path):
+                    st.warning("Logo file not found")
+                else:
+                    st.warning("Invalid logo file")
         with col2:
             st.markdown('<span class="os37-title">OS37 Healthcare Analytics 🏥</span>', unsafe_allow_html=True)
             st.markdown('<span class="os37-tagline">Privacy-Native Medical Data Intelligence</span>', unsafe_allow_html=True)
